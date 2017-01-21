@@ -20,7 +20,7 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": ["../node_modules/file-saver/FileSaver.js"],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
