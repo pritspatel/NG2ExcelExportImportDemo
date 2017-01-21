@@ -20,7 +20,7 @@ public class ExcelExportController {
     @Autowired
     private ExcelExportService excelExportService;
 
-    @RequestMapping(value="/download", method= RequestMethod.GET, produces = "application/vnd.ms-excel")
+    @RequestMapping(value="/download", method= RequestMethod.GET)
     public ResponseEntity<InputStreamResource> downloadExcelOutputExl(HttpServletResponse response){
 
         excelExportService.createExcelOutput(response);
