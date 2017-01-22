@@ -16,7 +16,7 @@ export class ExcelFileService{
             headers: new Headers()
         }).subscribe(
             (response) => {
-                var blob = new Blob([response.blob()], {type: 'application/zip'});
+                var blob = new Blob([response.blob()], {type: 'application/e'});
                 var filename = 'file.xls';
                 saveAs(blob, filename);
             }

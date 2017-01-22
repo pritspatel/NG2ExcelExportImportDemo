@@ -5,6 +5,10 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {ExcelFileService} from "./service/excel.file.service";
+import {CarService} from "./service/car.service";
+import {DataTable} from "primeng/primeng";
+import {DataTableModule} from "primeng/components/datatable/datatable";
+import {FileUploadModule} from "primeng/components/fileupload/fileupload";
 
 @NgModule({
   declarations: [
@@ -13,9 +17,11 @@ import {ExcelFileService} from "./service/excel.file.service";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    DataTableModule,
+      FileUploadModule
   ],
-  providers: [ExcelFileService],
+  providers: [ExcelFileService,CarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

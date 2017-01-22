@@ -1,5 +1,7 @@
 package com.prits.importexportapi.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,8 +13,12 @@ import java.io.*;
 @RestController
 public class ExcelImportController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ExcelImportController.class);
+
     @RequestMapping(value="/upload", method= RequestMethod.POST)
     public @ResponseBody   String handleFileUpload(@RequestParam("file") MultipartFile file){
+
+        logger.info("Uploading file to path : {}",System.getProperty("java.io.tmpdir"));
         String path = "c:\\tmp\\uploads\\";
         if (!file.isEmpty()) {
             try {
