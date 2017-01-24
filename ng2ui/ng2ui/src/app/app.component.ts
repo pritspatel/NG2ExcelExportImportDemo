@@ -39,6 +39,7 @@ export class AppComponent {
     onUpload(event) {
         for (let file of event.files) {
             this.uploadedFiles.push(file);
+            this.fileService.importFile(file);
         }
     }
 }

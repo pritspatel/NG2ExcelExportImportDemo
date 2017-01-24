@@ -2,9 +2,13 @@ package com.prits.importexportapi.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 /**
@@ -15,10 +19,16 @@ public class ExcelImportController {
 
     private static final Logger logger = LoggerFactory.getLogger(ExcelImportController.class);
 
-    @RequestMapping(value="/upload", method= RequestMethod.POST)
-    public @ResponseBody   String handleFileUpload(@RequestParam("file") MultipartFile file){
+    @RequestMapping(value="/upload", method= RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public @ResponseBody String uploadFile(HttpServletRequest request, HttpServletResponse response){
+    //public @ResponseBody   String handleFileUpload(@RequestParam("file") MultipartFile file){
 
-        logger.info("Uploading file to path : {}",System.getProperty("java.io.tmpdir"));
+        MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
+        Iterable<String> fileNames = (Iterable<String>) req.getFileNames();
+        for(String fname : fileNames){
+            logger.info("*************** File name : " + fname);
+        }
+        /*logger.info("Uploading file to path : {}",System.getProperty("java.io.tmpdir"));
         String path = "c:\\tmp\\uploads\\";
         if (!file.isEmpty()) {
             try {
@@ -32,7 +42,9 @@ public class ExcelImportController {
             }
         } else {
             return "You failed to upload " + path + " because the file was empty.";
-        }
+        }*/
+
+        return "success";
     }
 
 
