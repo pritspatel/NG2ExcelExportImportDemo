@@ -30,8 +30,9 @@ public class ExcelExportService {
 
         // Create a row and put some cells in it. Rows are 0 based.
         Row row = sheet.createRow((short) 0);
+        writeExcelOutputData(row,sheet);
         // Create a cell and put a value in it.
-        Cell cell = row.createCell(0);
+        /*Cell cell = row.createCell(0);
         cell.setCellValue(1);
 
         Cell cell1 = row.createCell(1);
@@ -49,7 +50,7 @@ public class ExcelExportService {
                 new String[]{"40--GHI", "50--DEF", "60--ABC"});
         DataValidation dataValidation1 = new HSSFDataValidation(addressList1, dvConstraint1);
         dataValidation1.setSuppressDropDownArrow(false);
-        sheet.addValidationData(dataValidation1);
+        sheet.addValidationData(dataValidation1);*/
 
 
         response.setContentType("application/vnd.ms-excel");
@@ -61,6 +62,21 @@ public class ExcelExportService {
 
 
     }
+
+    private void writeExcelOutputData(Row row, Sheet sheet){
+        int cellCounter = 0;
+        for (int rowNo = 0; rowNo <= 5; rowNo++) {
+            Cell cell1 = row.createCell(rowNo);
+            cell1.setCellValue(rowNo);
+            CellRangeAddressList addressList1 = new CellRangeAddressList(0, 0, rowNo, rowNo);
+            DVConstraint dvConstraint1 = DVConstraint.createExplicitListConstraint(new String[]{"40--GHI", "50--DEF", "60--ABC"});
+            DataValidation dataValidation1 = new HSSFDataValidation(addressList1, dvConstraint1);
+            dataValidation1.setSuppressDropDownArrow(false);
+            sheet.addValidationData(dataValidation1);
+            cellCounter++;
+        }
+    }
+
     /*public WritableWorkbook createExcelOutput(HttpServletResponse response) {
         String fileName = "Excel_Output.xls";
         WritableWorkbook writableWorkbook = null;
